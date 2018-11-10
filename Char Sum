@@ -1,0 +1,14 @@
+include<stdio.h>
+int main()
+{
+    char s[100];
+    int i,sum=0;
+    gets(s);
+    for(i=0;s[i]!='\0';i++)
+    {
+        s[i]=s[i]-96;
+        sum=sum+s[i];
+    }
+    printf("%d",sum);
+    return 0;
+}
