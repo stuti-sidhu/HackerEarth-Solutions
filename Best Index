@@ -1,0 +1,42 @@
+#include <stdio.h>
+int findIndexToBeSum(int countOfLeftOverItems);
+int main(){
+	int length;
+	scanf("%d", &length);
+	
+	int arr[length];
+	long long int maxSplSum;
+	long long cumSum[length];
+	
+	for(int i=0; i<length; i++){
+        scanf("%d", &arr[i]); 
+	}
+	
+	maxSplSum = (long long) arr[length-1];
+	cumSum[length-1]= (long long) arr[length-1];
+	
+	for(int j=(length-2); j>=0; j--){
+	    cumSum[j] = (long long)arr[j] + cumSum[j+1];
+        
+        int countOfLeftOverItems = length-1-j;
+        int indexToBeSum;
+        indexToBeSum=findIndexToBeSum(countOfLeftOverItems);
+        long long splSum = cumSum[j] - cumSum[j+indexToBeSum+1];
+        
+        //printf("Individual Spl sum is %d \n", splSum);
+        
+        if(maxSplSum<splSum)  
+            maxSplSum = splSum;    
+    }
+    printf("\n %lld", maxSplSum);
+}
+ 
+//Function #2
+int findIndexToBeSum(int countOfLeftOverItems){
+    int indexToBeSum=0, i=0;
+	while((indexToBeSum+1+i)<countOfLeftOverItems){
+	    indexToBeSum = indexToBeSum+2+i;
+	    i++;
+    }
+	return indexToBeSum;
+}
